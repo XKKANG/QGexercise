@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .boxShadow li a:hover {
+            box-shadow: 0 18px 30px rgba(0, 0, 0, .1);
+        }
+
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .w1226 {
+            width: 1226px;
+            margin: 0 auto;
+        }
+
+        .headerTop {
+
+            width: 100%;
+            height: 40px;
+            color: #b0b0b0;
+            background-color: #333;
+        }
+
+        .headerTop .headerTopMiddle {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .headerTop .headerTopMiddle ul {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .headerTop .headerTopMiddle ul a {
+            display: block;
+            height: 100%;
+            line-height: 40px;
+            padding: 5px;
+            color: #b0b0b0;
+            font-size: 12px;
+        }
+
+        .headerTop .headerTopMiddle .headerTopRight ul a {
+            padding: 0 14px;
+        }
+
+        .headerTop .headerTopMiddle .headerTopRight ul .shopping {
+            padding: 0 40px;
+        }
+
+        .headerBottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100px;
+        }
+
+        .headerBottom .logo {
+            display: block;
+            width: 56px;
+            height: 56px;
+        }
+
+        .headerBottom .logo img {
+            display: block;
+            width: 56px;
+            height: 56px;
+        }
+
+        .headerBottom .occupy {
+            box-sizing: content-box;
+            width: 140px;
+            height: 100%;
+            margin: 0 10px;
+
+        }
+
+        .headerBottom ul {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .headerBottom ul a {
+            display: block;
+            padding: 26px 10px 38px;
+            width: 100%;
+            height: 100%;
+            color: #333333;
+            font-size: 16px;
+        }
+
+        .headerBottom ul a:hover {
+            color: #ff6700;
+        }
+
+        .headerBottom .search {
+            float: right;
+            display: flex;
+            width: 230px;
+            height: 50px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .headerBottom .search .searchLeft input {
+            border: none;
+            width: 184px;
+            height: 100%;
+            text-indent: 1em;
+            border-right: 1px solid #e0e0e0;
+        }
+
+        .headerBottom .search .searchRight a {
+            display: block;
+            width: 46px;
+            height: 100%;
+            line-height: 50px;
+            text-align: center;
+        }
+
+        .headerBottom .search .searchRight a:hover {
+            background-color: #ff6900;
+        }
+
+        .header .headerTop .headerTopLeft .download {
+            width: 124px;
+            height: 148px;
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="header">
+        <div class="headerTop">
+            <div class="headerTopMiddle w1226">
+                <div class="headerTopLeft">
+                    <ul>
+                        <li><a href="#">小米官网</a></li>
+                        <li><a href="#">小米商城</a></li>
+                        <li><a href="#">小米澎湃OS</a></li>
+                        <li><a href="#">小米汽车</a></li>
+                        <li><a href="#">云服务</a></li>
+                        <li><a href="#">有品</a></li>
+                        <li><a href="#">loT</a></li>
+                        <li><a href="#">小爱开放平台</a></li>
+                        <li><a href="#">资质证明</a></li>
+                        <li><a href="#">协议规则</a></li>
+                        <li>
+                            <a href="#">下载app</a>
+                            <div class="download">
+                                <a href="#">
+                                    <img src="xiaomiIma/download.png" alt="">
+                                    小米商城APP
+                                </a>
+                            </div>
+
+
+                        </li>
+                        <li><a href="#">SelectLocation</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="headerTopRight">
+                    <ul>
+                        <li><a href="#">登录 </a></li>
+                        <li><a href="#">注册 </a></li>
+                        <li><a href="#">消息通知 </a> </li>
+                        <li><a href="#" class="shopping"><i class="iconfont shopping-car">&#xe600;</i>&nbsp;&nbsp;购物车
+                            </a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="headerBottom w1226">
+            <a href="https://www.mi.com" target="_blank" class="logo"><img src="xiaomiIma/logo-mi2.png">
+            </a>
+            <div class="occupy"></div>
+            <ul>
+                <li><a href="#">Xiaomi手机 </a> </li>
+                <li><a href="#">REDMI手机 </a> </li>
+                <li><a href="#">电视 </a> </li>
+                <li><a href="#">笔记本 </a> </li>
+                <li><a href="#">平板 </a> </li>
+                <li><a href="#">家电 </a> </li>
+                <li><a href="#">路由器 </a> </li>
+                <li><a href="#">服务中心 </a> </li>
+                <li><a href="#">社区 </a> </li>
+            </ul>
+            <div class="search">
+                <div class="searchLeft">
+                    <input type="text" placeholder="红米">
+                </div>
+                <div class="searchRight">
+
+                    <a href="#"><i class="iconfont search-icon"></i></a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+</body>
+
+</html>
