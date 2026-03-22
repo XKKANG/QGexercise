@@ -61,18 +61,19 @@
         <div class="headerBottom w1226">
             <a href="https://www.mi.com" target="_blank" class="logo"><img src="xiaomiIma/logo-mi2.png">
             </a>
-            <ul>
-                <li class="droplist">
-                    <a href="#">Xiaomi手机 </a>
+            <div class="occupy"></div>
+            <ul class="droplist">
+                <li>
+                    <a href="#" data-id="0">Xiaomi手机 </a>
                 </li>
-                <li><a href="#">REDMI手机 </a> </li>
-                <li><a href="#">电视 </a> </li>
-                <li><a href="#">笔记本 </a> </li>
-                <li><a href="#">平板 </a> </li>
-                <li><a href="#">家电 </a> </li>
-                <li><a href="#">路由器 </a> </li>
-                <li><a href="#">服务中心 </a> </li>
-                <li><a href="#">社区 </a> </li>
+                <li><a href="#" data-id="1">REDMI手机 </a> </li>
+                <li><a href="#" data-id="2">电视 </a> </li>
+                <li><a href="#" data-id="3">笔记本 </a> </li>
+                <li><a href="#" data-id="4">平板 </a> </li>
+                <li><a href="#" data-id="5">家电 </a> </li>
+                <li><a href="#" data-id="6">路由器 </a> </li>
+                <li><a href="#" data-id="7">服务中心 </a> </li>
+                <li><a href="#" data-id="8">社区 </a> </li>
             </ul>
             <div class="search">
                 <input type="find" name="keyword" autocomplete="off" placeholder="红米">
@@ -89,35 +90,32 @@
                 <button class="iconfont search-icon">&#xe63a;</button>
             </div>
         </div>
-        <div class="smallSlider">
-            <ul class="w1226">
-
-            </ul>
-        </div>
     </nav>
     <div class="navslider w1226">
         <img src="xiaomiIma/slider-01.webp" alt="">
+        <button class="prev iconfont">&#xe602;</button>
+        <button class="next iconfont">&#xe601;</button>
         <div class="doll">
             <ul class="mindoll">
-                <li><a href="#" class="active"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
+                <li data-liID="0"><a href="#" class="active"></a></li>
+                <li data-liID="1"><a href="#"></a></li>
+                <li data-liID="2"><a href="#"></a></li>
+                <li data-liID="3"><a href="#"></a></li>
+                <li data-liID="4"><a href="#"></a></li>
+                <li data-liID="5"><a href="#"></a></li>
             </ul>
         </div>
         <ul class="navType">
-            <li><a href="#">手机</a><i class="iconfont arrowRight"></i></li>
-            <li><a href="#">手机</a><i class="iconfont arrowRight"></i></li>
-            <li><a href="#">手机</a><i class="iconfont arrowRight"></i></li>
-            <li><a href="#">手机</a><i class="iconfont arrowRight"></i></li>
-            <li><a href="#">手机</a><i class="iconfont arrowRight"></i></li>
-            <li><a href="#">手机</a><i class="iconfont arrowRight"></i></li>
-            <li><a href="#">手机</a><i class="iconfont arrowRight"></i></li>
-            <li><a href="#">手机</a><i class="iconfont arrowRight"></i></li>
-            <li><a href="#">手机</a><i class="iconfont arrowRight"></i></li>
-            <li><a href="#">手机</a><i class="iconfont arrowRight"></i></li>
+            <li><a href="#" class="iconfont" data-typeid="0">手机<span>&#xe603;</span></a></li>
+            <li><a href="#" class="iconfont" data-typeid="1">电视<span>&#xe603;</span></a></li>
+            <li><a href="#" class="iconfont" data-typeid="2">家电<span>&#xe603;</span></a></li>
+            <li><a href="#" class="iconfont" data-typeid="3">笔记本 平板 显示器<span>&#xe603;</span></a></li>
+            <li><a href="#" class="iconfont" data-typeid="4">出行 穿戴<span>&#xe603;</span></a></li>
+            <li><a href="#" class="iconfont" data-typeid="5">耳机 音箱<span>&#xe603;</span></a></li>
+            <li><a href="#" class="iconfont" data-typeid="6">健康 儿童<span>&#xe603;</span></a></li>
+            <li><a href="#" class="iconfont" data-typeid="7">生活 箱包<span>&#xe603;</span></a></li>
+            <li><a href="#" class="iconfont" data-typeid="8">智能 路由器<span>&#xe603;</span></a></li>
+            <li><a href="#" class="iconfont" data-typeid="9">电源 配件<span>&#xe603;</span></a></li>
         </ul>
     </div>
     <ul class="homeList w1226">
@@ -153,7 +151,109 @@
                     </a></li>
             </ul>
         </div>
+        <!-- <h1 class="box-hd w1226">智能穿戴
+            <div class="more">
+                <a href="#" target="_blank">查看更多</a>
+            </div>
+        </h1>
+        <div class="box-bd w1226">
+            <ul class="boxShadow air">
+                <li class="li1"><a href="#" target="_blank">
+                        <img src="xiaomiIma/air-01.webp" alt="xiaomi 15系列">
+                    </a></li>
 
+                <li>
+                    <a href="#" target="_blank">
+                        <img src="xiaomiIma/air-02.webp" alt="耳机">
+                        <h3></h3>
+                        <p class="desc"></p>
+                        <p class="price">
+                            <span></span><span></span>
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">
+                        <img src="xiaomiIma/air-02.webp" alt="耳机">
+                        <h3></h3>
+                        <p class="desc"></p>
+                        <p class="price">
+                            <span></span><span></span>
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">
+                        <img src="xiaomiIma/air-02.webp" alt="耳机">
+                        <h3></h3>
+                        <p class="desc"></p>
+                        <p class="price">
+                            <span></span><span></span>
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">
+                        <img src="xiaomiIma/air-02.webp" alt="耳机">
+                        <h3></h3>
+                        <p class="desc"></p>
+                        <p class="price">
+                            <span></span><span></span>
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">
+                        <img src="xiaomiIma/air-02.webp" alt="耳机">
+                        <h3></h3>
+                        <p class="desc"></p>
+                        <p class="price">
+                            <span></span><span></span>
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">
+                        <img src="xiaomiIma/air-02.webp" alt="耳机">
+                        <h3></h3>
+                        <p class="desc"></p>
+                        <p class="price">
+                            <span></span><span></span>
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" target="_blank">
+                        <img src="xiaomiIma/air-02.webp" alt="耳机">
+                        <h3></h3>
+                        <p class="desc"></p>
+                        <p class="price">
+                            <span></span><span></span>
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <div>
+                        <div class="left">
+                            <h3>Redmi Buds 6</h3>
+                            <p class="price">189元</p>
+                        </div>
+                        <div class="right">
+                            <img src="xiaomiIma/air-10.webp" alt="">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="left">
+                            <h3 class="watch">浏览更多</h3>
+                            <p class="erji">耳机</p>
+                        </div>
+                        <div class="right">
+                            <i class="iconfont circleRight">&#xe8bb;</i>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div> -->
         <div class="mainProduct w1226"><a href="#"><img src="xiaomiIma/adverLast.webp" alt="XIAOMI 17"></a></div>
     </div>
     <div class="footer">

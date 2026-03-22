@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="04-信息.css">
+</head>
+
+<body>
+    <div class="language">
+        <span class="author">作者</span>
+        <span>En</span>
+        <span>/</span>
+        <span class="active">中</span>
+    </div>
+
+    <div class="header">
+        <div class="headerMiddle"><img src="xinxiIma/todo.svg" alt=""></div>
+    </div>
+
+    <div class="inputList marginBottom">
+        <input type="text" placeholder="新增待办事项...">
+        <button>提交</button>
+    </div>
+    <div class="alert">
+        💡请输入内容！
+    </div>
+    <div class="container">
+        <div class="main">
+            <div class="contain">
+                <div class="allFinish">全部标为完成</div>
+                <div class="slogan">今日事今日毕，勿将今事待明日!.☕</div>
+            </div>
+            <div class="content">
+                <div class="tip">添加你的第一个待办事项！📝</div>
+                <div class="method">食用方法💡：</div>
+                <ul>
+                    <li>✔️ 拖拽Todo上下移动可排序(仅支持PC)所有提交操作支持Enter回车键提交</li>
+                    <li>✔️ 拖拽Todo上下移动可排序(仅支持PC)拖拽Todo上下移动可排序(仅支持PC)</li>
+                    <li>✔️ 拖拽Todo上下移动可排序(仅支持PC)双击上面的标语和Todo可进行编辑</li>
+                    <li>✔️ 拖拽Todo上下移动可排序(仅支持PC)右侧的小窗口是快捷操作哦</li>
+                </ul>
+                <div class="note">🔒 所有的Todo数据存储在浏览器本地</div>
+                <div class="note">📝 支持下载和导入，导入追加到当前序列</div>
+            </div>
+
+            <div class="footer"></div>
+        </div>
+        <div class="menu">
+            <div class="menu-close">
+                <div class="item close">Fliter</div>
+                <div class="item shorcut">快捷操作</div>
+            </div>
+            <div class="menu-open">
+                <div class="item open">开✨</div>
+                <div class="item all">全部</div>
+                <div class="item wasDone">全部标为已完成</div>
+                <div class="item clearDone">取消已完成</div>
+                <div class="item clearAll">清除全部</div>
+                <div class="item import">导入(txt/json)</div>
+            </div>
+        </div>
+    </div>
+    <script src="04-信息录入.js"></script>
+</body>
+
+</html>
