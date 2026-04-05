@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>三步实现：拖拽自动留空 + 挤开效果</title>
+    <style>
+        #container {
+            width: 300px;
+            margin: 20px;
+        }
+
+        .item {
+            padding: 12px;
+            margin: 6px 0;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: grab;
+            transition: transform 0.2s ease;
+        }
+
+        .item.dragging {
+            opacity: 0.4;
+            background: #e0e0e0;
+        }
+
+        /* 这个就是你要的：空白占位符 */
+        .placeholder {
+            height: 46px;
+            margin: 6px 0;
+            background: #dcedff;
+            border: 1px dashed #70a9ff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+        <div class="item" draggable="true">任务 1</div>
+        <div class="item" draggable="true">任务 2</div>
+        <div class="item" draggable="true">任务 3</div>
+        <div class="item" draggable="true">任务 4</div>
+        <div class="item" draggable="true">任务 5</div>
+    </div>
+
+    <script>
+        const container = document.getElementById('container');
+        let draggedItem = null;    // 正在拖拽的元素
+        let placeholder = null;    // 空白占位（你要的“留出位置”）
+
+        // ======================================
+        // 1. 【第一步】dragstart：开始拖拽
+        // ======================================
+        container.addEventListener('dragstart', (e) => {
+            draggedItem = e.target;
+            draggedItem.classList.add('dragging');
+
+            // 创建空白占位（就是拖拽时留出的位置）
+            placeholder = document.createElement('div');
+            placeholder.className = 'placeholder';
+        });
+
+        // ======================================
+        // 2. 【第二步】dragover：拖拽移动（核心）
+        // ======================================
+        container.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            const target = e.target;
+
+            // 只对 item 生效
+            if (!target.classList.contains('item')) return;
+            if (target === draggedItem) return;
+
+            // 判断鼠标在元素上半部分还是下半部分
+            const rect = target.getBoundingClientRect();
+            const midY = rect.top + rect.height / 2;
+
+            // 👇 关键：插入空白占位，实现“留出位置”效果
+            if (e.clientY < midY) {
+                container.insertBefore(placeholder, target);
+            } else {
+                container.insertBefore(placeholder, target.nextSibling);
+            }
+        });
+
+        // ======================================
+        // 3. 【第三步】drop：松手插入
+        // ======================================
+        container.addEventListener('drop', (e) => {
+            e.preventDefault();
+
+            // 把占位符替换成真正的元素
+            placeholder.parentNode.replaceChild(draggedItem, placeholder);
+
+            draggedItem.classList.remove('dragging');
+            draggedItem = null;
+            placeholder = null;
+        });
+    </script>
+
+</body>
+
+</html>

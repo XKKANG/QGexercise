@@ -19,6 +19,13 @@ const clearAll = document.querySelector('.clearAll')
 const importer = document.querySelector('.importer')
 const menuOpen = document.querySelector('.menu-open')
 const menuClose = document.querySelector('.menu-close')
+//弹窗
+const modal = document.querySelector('.modal')
+const alertTitle = document.querySelector('.alertTitle')
+const alertContent = document.querySelector('.alertContent')
+const btnConfirm = document.querySelector('.btn-confirm')
+const btnCancel = document.querySelector('.btn-cancel')
+
 //刷新
 let todoList = []
 //默认页面-->防止不同页面之间的按键会出bug（都委托给todoContent了）
@@ -64,6 +71,15 @@ const langPack = {
         clearAll: "清除全部",
         exportText: "导出(txt/json)",
         importText: "导入(txt/json)",
+        //弹窗
+        cancel: "取消",
+        confirm: "确定",
+        confirmPlease: "请确认",
+        //弹窗text
+        confirmAll: "确认一键勾选完成全部待办事项？",
+        confirmClearAll: "确认清除全部待办事项?",
+        confirmClearDone: "确认清除全部已完成的代办事项?",
+        confirmPermant: "确定永久删除？",
         //绿色块 
         allFinishBtn: "全部标为完成"
     },
@@ -105,6 +121,15 @@ const langPack = {
         exportText: "Export(txt/json)",
         importText: "Import(txt/json)",
 
+        cancel: "cancel",
+        confirm: "confirm",
+        confirmPlease: "Please Confirm",
+
+        confirmAll: "Confirm to mark all todos as completed?",
+        confirmClearAll: "Confirm to clear all todos?",
+        confirmClearDone: "Confirm to clear all completed todos?",
+        confirmPermant: "Confirm permanent deletion?",
+
         allFinishBtn: "Mark All Completed"
     }
 };
@@ -136,7 +161,9 @@ function changeLanguage() {
     document.querySelector(".open").textContent = t.open
     document.querySelector(".shortcut").textContent = t.shortcut
     document.querySelector(".importer").textContent = t.importText
-
+    //弹窗
+    document.querySelector(".btn-confirm").textContent = t.confirm
+    document.querySelector(".btn-cancel").textContent = t.cancel
     //这里是渲染的
     if (page === 'all') {
         renderContent();
@@ -394,7 +421,9 @@ todoContent.addEventListener('click', function (e) {
         let del1find = e.target.closest('.btn-del1')
         if (del1find) {
             let del1id = del1find.dataset.id
-            permantDel(del1id)
+            manmadeAlert(t.confirmPermant, function () {
+                permantDel(del1id)
+            })
             return
         }
 
@@ -495,7 +524,9 @@ function toggleTrashbox() {
 //点那个全选绿色块
 const allFinish = document.querySelector('.allFinish')
 allFinish.addEventListener('click', () => {
-    allSelected()
+    manmadeAlert(t.confirmAll, function () {
+        allSelected()
+    })
 })
 //点击切换开关
 menuClose.addEventListener('click', function (e) {
@@ -545,16 +576,26 @@ menuOpen.addEventListener('click', function (e) {
 //点清除已完成
 menuOpen.addEventListener('click', function (e) {
     if (e.target.classList.contains('clearDone')) {
-        clearSelected()
+        manmadeAlert(t.confirmClearDone, function () {
+            clearSelected()
+        })
     }
 })
 //点清除全部
 menuOpen.addEventListener('click', function (e) {
     if (e.target.classList.contains('clearAll')) {
-        removeAll()
+        manmadeAlert(t.confirmClearAll, function () {
+            removeAll()
+
+        })
     }
 })
-
+//点导出
+menuOpen.addEventListener('click', function (e) {
+    if (e.target.classList.contains('exporter')) {
+        exportTodo()
+    }
+})
 //全选绿色块隐藏与显示
 function allFinishbtn() {
     const realCount = todoList.filter(item => !item.deleted).length
@@ -610,6 +651,18 @@ function exportTodo() {
 
     URL.revokeObjectURL(url)
     alert('导出成功！')
+}
+//弹窗
+function manmadeAlert(text, dirive) {
+    modal.style.display = 'flex'
+    alertContent.innerHTML = text
+    btnConfirm.onclick = function () {
+        modal.style.display = 'none'
+        dirive()
+    }
+    btnCancel.onclick = function () {
+        modal.style.display = 'none'
+    }
 }
 
 //页面加载立即执行
