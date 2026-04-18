@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教学管理系统</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- 固定框架，不变的 ->头部和主体部分（侧边栏+内容）-->
+    <div class="static">
+        <!-- 头部 -->
+        <div class="header">
+            <div class="header-left">
+                <!-- 侧边栏按钮 -->
+                <div class="simulate-btn">☰</div>
+                <h1>📚 教学管理系统</h1>
+            </div>
+            <div class="userinfor">
+                <span id="user-name"></span>
+                <span id="user-role"></span>
+                <button class="btn-logout">退出</button>
+            </div>
+        </div>
+        <!-- 主体部分，侧边栏+模块内容 -->
+        <div class="main-body">
+            <!-- 导航栏 -->
+            <div class="nav">
+                <ul id="nav-menu">
+
+                </ul>
+            </div>
+            <!-- 模块内容 -->
+            <div class="module">
+                <!-- 模块视图 -->
+                <div class="view keleton" id="scores-view">
+                    <div class="skeleton-row"></div>
+                    <div class="skeleton-row"></div>
+                    <div class="skeleton-row"></div>
+                </div>
+                <div class="view keleton" id="notices-view">
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                </div>
+                <div class="view keleton" id="classes-view">
+                    <div class="skeleton-row"></div>
+                </div>
+                <div class="view keleton" id="logs-view">
+                    <div class="skeleton-row"></div>
+                </div>
+                <div class="view keleton" id="stats-view">
+                    <div class="skeleton-row"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/common.js"></script>
+<script src="js/modules/scores.js"></script>
+<script src="js/modules/notices.js"></script>
+<script src="js/modules/classes.js"></script>
+<script src="js/modules/logs.js"></script>
+<script src="js/modules/stats.js"></script>
+<script src="js/dashboard.js"></script>
+
+</html>

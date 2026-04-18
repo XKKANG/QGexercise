@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教学系统 - 登录/注册</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="card">
+        <div class="tabs">
+            <button class="btn-tab" data-tab="tab-login">登录</button>
+            <button class="btn-tab active" data-tab="tab-register">注册</button>
+        </div>
+        <!-- 表单 -->
+        <div class="form-container">
+            <!-- 登录表单 -->
+            <form id="login-form" class="form">
+                <div class="input-item">
+                    <label for="login-username">用户名</label>
+                    <input type="text" id="login-username" name="username" placeholder="请输入用户名" required>
+                </div>
+                <div class="input-item">
+                    <label for="login-user_number">学号/工号</label>
+                    <input type="text" id="login-user_number" name="user_number" placeholder="学号（学生） 或 工号（教师）" required>
+                </div>
+                <div class="input-item">
+                    <label for="login-password">密码</label>
+                    <input type="password" id="login-password" name="password" placeholder="请输入密码" required>
+                </div>
+                <button type="submit" class="btn btn-login">登 录</button>
+                <!-- 提示信息 -->
+                <div id="login-message" class="message"></div>
+            </form>
+
+
+            <!-- 注册表单 -->
+            <form id="register-form" class="form  active">
+                <div class="input-item">
+                    <label for="register-username">用户名</label>
+                    <input type="text" id="register-username" name="username" placeholder="请输入您的真实姓名" required
+                        autocomplete="off">
+                </div>
+
+                <div class="input-item">
+                    <label for="register-password">密码</label>
+                    <input type="password" id="register-password" name="password" placeholder="6-20位，不含空格" required
+                        autocomplete="off">
+                </div>
+
+                <div class="input-item">
+                    <label for="register-role">角色</label>
+                    <select name="role" id="register-role" required>
+                        <option value="" disabled selected>请选择身份</option>
+                        <option value="student">学生</option>
+                    </select>
+                </div>
+                <div class="explain">* 学生注册后需由管理员分配班级，教师需管理员绑定班级</div>
+                <button type="submit" class="btn btn-register">注 册</button>
+                <!-- 提示信息 -->
+                <div id="register-message" class="message"></div>
+            </form>
+        </div>
+    </div>
+    <script src="js/common.js"></script>
+    <script src="js/login.js"></script>
+</body>
+
+</html>

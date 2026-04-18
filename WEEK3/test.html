@@ -1,105 +1,144 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
-    <title>三步实现：拖拽自动留空 + 挤开效果</title>
+    <title>极简拖拽排序-原始版</title>
     <style>
-        #container {
+        .list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
             width: 300px;
-            margin: 20px;
         }
 
         .item {
-            padding: 12px;
-            margin: 6px 0;
-            background: #f5f5f5;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            background: #eee;
+            padding: 10px;
             cursor: grab;
-            transition: transform 0.2s ease;
         }
 
-        .item.dragging {
-            opacity: 0.4;
-            background: #e0e0e0;
-        }
-
-        /* 这个就是你要的：空白占位符 */
+        /* 占位符样式：用来预览插入位置，会拉开间距 */
         .placeholder {
-            height: 46px;
-            margin: 6px 0;
-            background: #dcedff;
-            border: 1px dashed #70a9ff;
+            height: 50px;
+            background: lightblue;
+            border: 2px dashed blue;
+            margin: 4px 0;
+            pointer-events: none;
         }
     </style>
 </head>
 
 <body>
-
-    <div id="container">
-        <div class="item" draggable="true">任务 1</div>
-        <div class="item" draggable="true">任务 2</div>
-        <div class="item" draggable="true">任务 3</div>
-        <div class="item" draggable="true">任务 4</div>
-        <div class="item" draggable="true">任务 5</div>
-    </div>
+    <div class="list" id="list"></div>
+    <p>拖拽调整顺序 → 移到两项之间出现蓝条 → 释放即重新渲染</p>
 
     <script>
-        const container = document.getElementById('container');
-        let draggedItem = null;    // 正在拖拽的元素
-        let placeholder = null;    // 空白占位（你要的“留出位置”）
+        // 数据
+        let items = ["任务 A", "任务 B", "任务 C", "任务 D"];
+        const container = document.getElementById('list');
 
-        // ======================================
-        // 1. 【第一步】dragstart：开始拖拽
-        // ======================================
-        container.addEventListener('dragstart', (e) => {
-            draggedItem = e.target;
-            draggedItem.classList.add('dragging');
+        // 全局变量
+        let dragSrcIndex = null;
+        let pendingInsertIndex = null;
+        let placeholderDiv = null;
 
-            // 创建空白占位（就是拖拽时留出的位置）
-            placeholder = document.createElement('div');
-            placeholder.className = 'placeholder';
-        });
-
-        // ======================================
-        // 2. 【第二步】dragover：拖拽移动（核心）
-        // ======================================
-        container.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            const target = e.target;
-
-            // 只对 item 生效
-            if (!target.classList.contains('item')) return;
-            if (target === draggedItem) return;
-
-            // 判断鼠标在元素上半部分还是下半部分
-            const rect = target.getBoundingClientRect();
-            const midY = rect.top + rect.height / 2;
-
-            // 👇 关键：插入空白占位，实现“留出位置”效果
-            if (e.clientY < midY) {
-                container.insertBefore(placeholder, target);
-            } else {
-                container.insertBefore(placeholder, target.nextSibling);
+        // 渲染：完全根据数据重建DOM
+        function render() {
+            container.innerHTML = '';
+            for (let i = 0; i < items.length; i++) {
+                const div = document.createElement('div');
+                div.className = 'item';
+                div.textContent = items[i];
+                div.setAttribute('data-index', i);
+                div.draggable = true;
+                container.appendChild(div);
             }
+        }
+
+        // 移除占位符
+        function removePlaceholder() {
+            if (placeholderDiv && placeholderDiv.parentNode) {
+                placeholderDiv.parentNode.removeChild(placeholderDiv);
+            }
+            placeholderDiv = null;
+        }
+
+        // 根据鼠标Y坐标计算插入索引（基于当前.item元素）
+        function getInsertIndex(clientY) {
+            const itemsDom = document.querySelectorAll('.item');
+            for (let i = 0; i < itemsDom.length; i++) {
+                const rect = itemsDom[i].getBoundingClientRect();
+                const mid = rect.top + rect.height / 2;
+                if (clientY < mid) return i;
+            }
+            return itemsDom.length;
+        }
+
+        // 在指定索引前显示占位符
+        function showPlaceholderAt(index) {
+            removePlaceholder();
+            const itemsDom = document.querySelectorAll('.item');
+            const ph = document.createElement('div');
+            ph.className = 'placeholder';
+            if (index === 0) {
+                container.insertBefore(ph, itemsDom[0]);
+            } else if (index >= itemsDom.length) {
+                container.appendChild(ph);
+            } else {
+                container.insertBefore(ph, itemsDom[index]);
+            }
+            placeholderDiv = ph;
+        }
+
+        // 事件监听
+        container.addEventListener('dragstart', function (e) {
+            const target = e.target.closest('.item');
+            if (!target) return;
+            dragSrcIndex = parseInt(target.getAttribute('data-index'), 10);
+            // 不设置任何额外样式，不隐藏默认拖拽图
         });
 
-        // ======================================
-        // 3. 【第三步】drop：松手插入
-        // ======================================
-        container.addEventListener('drop', (e) => {
+        container.addEventListener('dragover', function (e) {
+            e.preventDefault(); // 必须，否则无法drop
+            if (dragSrcIndex === null) return;
+            const insertIdx = getInsertIndex(e.clientY);
+            pendingInsertIndex = insertIdx;
+            showPlaceholderAt(insertIdx);
+        });
+
+        container.addEventListener('drop', function (e) {
             e.preventDefault();
-
-            // 把占位符替换成真正的元素
-            placeholder.parentNode.replaceChild(draggedItem, placeholder);
-
-            draggedItem.classList.remove('dragging');
-            draggedItem = null;
-            placeholder = null;
+            if (dragSrcIndex === null || pendingInsertIndex === null) return;
+            const src = dragSrcIndex;
+            const targetIdx = pendingInsertIndex;
+            if (src !== targetIdx) {
+                // 修改数据
+                const newItems = [...items];
+                const [moved] = newItems.splice(src, 1);
+                let finalIdx = targetIdx;
+                if (targetIdx > src) finalIdx = targetIdx - 1;
+                newItems.splice(finalIdx, 0, moved);
+                items = newItems;
+                // 重新渲染
+                render();
+            }
+            // 清理占位符和状态
+            removePlaceholder();
+            dragSrcIndex = null;
+            pendingInsertIndex = null;
         });
-    </script>
 
+        container.addEventListener('dragend', function () {
+            // 拖拽结束（无论成功与否）移除占位符并重置状态
+            removePlaceholder();
+            dragSrcIndex = null;
+            pendingInsertIndex = null;
+        });
+
+        // 初始化
+        render();
+    </script>
 </body>
 
 </html>
